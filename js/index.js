@@ -16,7 +16,7 @@ layui.use('laydate', function(){
 	    if (strDate >= 0 && strDate <= 9) {
 	        strDate = "0" + strDate;
 	    }
-	    newDay = "2019-02-20"//preDate.getFullYear() + seperator1 + month + seperator1 + strDate;
+	    newDay = preDate.getFullYear() + seperator1 + month + seperator1 + strDate;
 	    //var monthdate = "2019-02"//preDate.getFullYear() + seperator1 + month;
 	    $("#newDate").val(newDay);
 	    newMonth = preDate.getFullYear() + seperator1 + month;
@@ -27,10 +27,10 @@ layui.use('laydate', function(){
   laydate.render({
     elem: '#newDate',
     max:'new Date()',
-		btns: ['now'],
+	btns: ['now'],
     done: function(value){
 	    getday(value);
-	  }
+	}
   });
   
 	var url = "http://192.168.1.168:6406/service/visitor/";
@@ -45,16 +45,16 @@ layui.use('laydate', function(){
 	    	getday(newDay);
 	    	$("#newDate").remove();
 	    	$(".form").html('<input type="text" class="layui-input" id="newDate" autocomplete="off" readonly unselectable="on">');
+	    	$("#newDate").val(newDay);
 	    	//常规用法
-			  laydate.render({
+			laydate.render({
 			    elem: '#newDate',
 			    max:'new Date()',
-			    value:new Date(),
 			    btns: ['now'],
 			    done: function(value){
 				    getday(value);
-				  }
-			  });
+			    }
+			});
 	    }else{
 	    	getmonth(newMonth);
 	    	$("#newDate").remove();
@@ -84,10 +84,10 @@ layui.use('laydate', function(){
 	function getmonth(value){
 		console.log(value)
 		var data = {month : value};
-		getallpersonnum(data,url+"day/num");
-		getmonthsexnum(data,url+"day/gendernum");
-		getmonthagenum(data,url+"day/agepartition");
-		getmonthareanum(data,url+"day/areanum");
+		getallpersonnum(data,url+"month/num");
+		getmonthsexnum(data,url+"month/gendernum");
+		getmonthagenum(data,url+"month/agepartition");
+		getmonthareanum(data,url+"month/areanum");
 	}
 
 	function getallpersonnum(data,url){
