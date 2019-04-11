@@ -140,8 +140,8 @@ body{
 	margin-left: 40px;
 }
 .peopleage{
-	width: 1080;
-	height: 45px;
+	width: 1080px;
+	height: 42px;
 	font-size: 25px;
 	color: white;
 	text-align: center;
@@ -242,5 +242,5 @@ body{
 	width: 255px;
     height: 44px;         
 	float: right;
-	padding: 45px 60px 0px 0px;
+	padding: 45px 75px 0px 0px;
 }
