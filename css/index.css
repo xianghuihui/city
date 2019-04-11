@@ -1,0 +1,246 @@
+html{
+	height: 100%;
+	width: 100%;
+}
+body{
+	background: linear-gradient(#001741,#010E1F);
+}
+.top{
+	padding-top: 20px;
+	padding-left: 60px;
+}
+.tab-menu ul{
+    padding: 0;
+    margin: 0;
+    display:inline-block;
+}
+.tab-menu ul li{
+    display: inline-block;
+    width: 324px;
+    height: 91px;
+    line-height: 90px;
+    color: #E3F0FE;
+    cursor: pointer;
+}
+.tab-menu ul li.tab0{
+    font-size: 35px;
+    background:url(../img/tab1.png);
+}
+.tab-menu ul li.tab1{
+    line-height: 75px;
+    font-size: 30px;
+    background:url(../img/tab2.png);
+}
+.day{
+    width: 1742px;
+    height: 678px;
+    background:url(../img/bg.png);
+    display: none;
+    padding: 15px;
+}
+.iframe{
+    width: 1780px;
+    height: 730px;
+    margin-top: -22px;
+    margin-left: -23px;
+}
+.day:first-child{
+    display: block;
+}
+.titleDiv{
+	padding-top: 20px;
+}
+.title{
+	height: 46px;
+	color: #2AB5D4;
+	float: left;
+	line-height: 46px;
+	font-size: 25px;
+	padding: 0px 120px 0px 170px;
+}
+.imgbt{
+	float: left;
+	height: 46px;
+	padding-left: 50px;
+}
+.numDiv{
+	width: 520px;
+	height: 220px;
+    background:url(../img/div1.png);
+    margin: 40px;
+    float: left;
+}
+.peoplenum{
+	width: 520px;
+	height: 68px;
+	font-size: 25px;
+	color: white;
+	text-align: center;
+	line-height: 45px;
+}
+.peoplenum1{
+	background:url(../img/title.png);
+	width: 144px;
+	height: 42px;
+	margin-left: 188px;
+}
+.daynum{
+	font-size: 25px;
+	color: white;
+	padding-left: 30px;
+}
+.daynum1{
+	width: 450px;
+	height: 100px;
+	line-height: 100px;
+	text-align: right;
+}
+@font-face {
+  font-family: 'UnidreamLED';
+  src:url(../util/UnidreamLED/UnidreamLED.eot); /***兼容ie9***/
+  src:url(../util/UnidreamLED/UnidreamLED.eot?#iefix)format('embedded-opentype'), /***兼容ie6-ie8***/
+  url('../util/UnidreamLED/UnidreamLED.woff') format('woff'), 
+  local('UnidreamLED'), url("../util/UnidreamLED/UnidreamLED.woff");/***默认使用本地的***/
+}
+.spanday{
+	font-size: 35px;
+    font-family: 'UnidreamLED';
+    letter-spacing: 8px;
+}
+
+.sexDiv{
+	width: 520px;
+	height: 220px;
+    background:url(../img/div1.png);
+    margin-top: 40px;
+    float: left;
+}
+.sexbgImg{
+	background:url(../img/title.png);
+	background-size: 190px 42px;
+	width: 190px;
+	height: 42px;
+	margin-left: 165px;
+}
+#pic1{
+	height:152px;
+	width:420px; 
+	padding-left: 50px;
+}
+.numsexDiv{
+	width: 1120px;
+	float: left;
+}
+
+.ageDiv{
+	width: 1083px;
+	height: 278px;
+	background:url(../img/div2.png);
+	float: left;
+	margin-left: 40px;
+}
+.peopleage{
+	width: 1080;
+	height: 45px;
+	font-size: 25px;
+	color: white;
+	text-align: center;
+	line-height: 45px;
+}
+.agebgImg{
+	background:url(../img/title.png);
+	background-size: 190px 42px;
+	width: 190px;
+	height: 42px;
+	margin-left: 445px;
+}
+#pic2{
+	height: 275px;
+	width: 1000px;
+	padding-left: 40px;
+}
+.areaDiv{
+	width: 520px;
+	height: 538px;
+	float:left;
+	margin: 40px;
+	background: url(../img/div3.png);
+}
+.areabgImg{
+	background:url(../img/title.png);
+	background-size: 220px 42px;
+	width: 220px;
+	height: 42px;
+	margin-left: 150px;
+}
+#pic3{
+	width: 520px;
+	height: 300px;
+	padding-top: 80px;
+}
+#pic4{
+	height:152px;
+	width:420px; 
+	padding-left: 50px;
+}
+#pic5{
+	height: 275px;
+	width: 1000px;
+	padding-left: 40px;
+}
+#pic6{
+	width: 520px;
+	height: 300px;
+	padding-top: 80px;
+}
+.buttom{
+	width: 1890px;
+	height: 178px;
+	margin-top: 15px;
+	background: url(../img/bgbottom.png);
+}
+.timeDate{
+	width: 700px;
+	height: 64px;
+	float: right;
+	padding-top: 80px;
+}
+.timeDate ul{
+    padding: 0;
+    margin: 0;
+}
+.timeDate ul li{
+    display: inline-block;
+    width: 281px;
+    height: 63px;
+    line-height: 63px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #E3F0FE;
+    text-align: center;
+}
+.timeDate ul li.tab2{
+    background:url(../img/city.png);
+}
+.timeDate ul li.tab3{
+    background:url(../img/fkbt.png);
+}
+.layui-input {
+    text-align: center;
+	width: 255px;
+    height: 42px!important;
+    font-size: 25px;
+	outline:none;
+	background: url(../img/date.png)!important;
+    cursor:pointer;
+    color: white;
+    letter-spacing: 5px;
+    font-family: 'UnidreamLED';
+    border: none!important;
+}
+.form{
+	width: 255px;
+    height: 44px;         
+	float: right;
+	padding: 45px 60px 0px 0px;
+}

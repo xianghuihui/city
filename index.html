@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+  		<link rel="stylesheet" href="js/layui/css/layui.css"  media="all">
+	</head>
+	<body>
+		<div class="top">
+			<div class="tab-menu">
+			    <ul>
+			        <li class="tab0">&nbsp;&nbsp;&nbsp;&nbsp;日报表</li>
+			        <li class="tab1">&nbsp;&nbsp;&nbsp;&nbsp;月报表</li>
+			    </ul>
+			    <div class="form"> <!-- 注意：这一层元素并不是必须的 -->
+				  <input type="text" class="layui-input" id="newDate" autocomplete="off" readonly unselectable="on">
+				</div>
+			</div>
+			<div class="tab-con">
+				<!--日报表-->
+			    <div class="day">
+			    	<div class="titleDiv"><img class="imgbt" src="img/bt1.png"><span class="title">智慧城市访客统计日报表</span><img class="imgbt" src="img/bt2.png"></div>
+				    <div class="numsexDiv">
+				    	<div class="numDiv">
+				    		<div class="peoplenum"><div class="peoplenum1">访客统计</div></div>
+				    		<div class="daynum">
+				    			当日访客流量统计：
+				    			<div class="daynum1">
+				    				<span class="spanday">3333</span>人
+				    			</div>
+				    		</div>
+				    	</div>
+				    	<div class="sexDiv">
+				    		<div class="peoplenum"><div class="sexbgImg">访客性别分布</div></div>
+							<div id="pic1"></div>
+				    	</div>
+				    	<div class="ageDiv">
+					    	<div class="peopleage"><div class="agebgImg">访客年龄分布</div></div>
+							<div id="pic2"></div>
+				    	</div>
+					</div>	    
+			    	<div class="areaDiv">
+				    	<div class="peopleage"><div class="areabgImg">访客分布热力图</div></div>
+						<div id="pic3"></div>
+			    	</div>
+			    </div>
+			    <div class="day">
+			    	<div class="titleDiv"><img class="imgbt" src="img/bt1.png"><span class="title">智慧城市访客统计月报表</span><img class="imgbt" src="img/bt2.png"></div>
+				    <div class="numsexDiv">
+				    	<div class="numDiv">
+				    		<div class="peoplenum"><div class="peoplenum1">访客统计</div></div>
+				    		<div class="daynum">
+				    			本月访客流量统计：
+				    			<div class="daynum1">
+				    				<span class="spanday">333</span>人
+				    			</div>
+				    		</div>
+				    	</div>
+				    	<div class="sexDiv">
+				    		<div class="peoplenum"><div class="sexbgImg">访客性别分布</div></div>
+							<div id="pic4"></div>
+				    	</div>
+				    	<div class="ageDiv">
+					    	<div class="peopleage"><div class="agebgImg">访客年龄分布</div></div>
+							<div id="pic5"></div>
+				    	</div>
+					</div>	    
+			    	<div class="areaDiv">
+				    	<div class="peopleage"><div class="areabgImg">访客分布热力图</div></div>
+						<div id="pic6"></div>
+			    	</div>
+			    </div>
+			    
+			</div>
+		</div>
+	    <div class="buttom">
+	    	<div class="timeDate">
+			    <ul>
+			        <li class="tab2">实时数据</li>
+			        <li class="tab3">访客统计</li>
+			    </ul>
+	    	</div>
+	    </div>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/layui/layui.js"></script>
+    <script src="js/echarts.js"></script>
+    <script src="js/index.js"></script>
+	</body>
+</html>
