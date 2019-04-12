@@ -32,12 +32,12 @@ layui.use('laydate', function(){
 	btns: ['now'],
     done: function(value){
 	    getday(value);
-	    days = value;
 	}
   });
 
 	var url = "http://192.168.1.168:6406/service/visitor/";
 
+	$(".tab .top").eq(0).hide();
 	$('.timeDate li').click(function () {
 		var index = $(this).index();
 		$(".tab .top").eq(index).show().siblings().hide();
@@ -59,7 +59,7 @@ layui.use('laydate', function(){
 			    btns: ['now'],
 			    done: function(value){
 				    getday(value);
-					$("#newDate").val(value);
+					//$("#newDate").val(value);
 			    }
 			});
 	    }else{
@@ -73,10 +73,9 @@ layui.use('laydate', function(){
 			    btns: ['confirm'],
 			    done: function(value){
 				    getmonth(value);
-					months = value;
 			    }
 	    	});
-	    	getmonth(months);
+			$("#newDate").val(months);
 	    }
 	})
 	
@@ -87,6 +86,7 @@ layui.use('laydate', function(){
 	})
 	
 	function getday(value){
+		days = value;
 		var data = {day : value};
 		getallpersonnum(data,url+"day/num");
 		getsexnum(data,url+"day/gendernum");
@@ -95,6 +95,7 @@ layui.use('laydate', function(){
 	}
 	
 	function getmonth(value){
+		months = value;
 		var data = {month : value};
 		getallpersonnum(data,url+"month/num");
 		getmonthsexnum(data,url+"month/gendernum");
@@ -103,7 +104,7 @@ layui.use('laydate', function(){
 	}
 
 	function getallpersonnum(data,url){
-		$(".spanday").text('');
+		//$(".spanday").text('');
 		$.ajax({
 			type:"get",
 			url: url,

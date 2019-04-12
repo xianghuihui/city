@@ -45,6 +45,18 @@ body{
     display: none;
     padding: 15px;
 }
+.data{
+	width: 1742px;
+	height: 678px;
+	background:url(../img/bg.png);
+	display: none;
+	padding: 15px;
+	position:absolute;
+	top: 127px;
+}
+.data:first-child{
+	display: block;
+}
 .iframe{
     width: 1780px;
     height: 730px;
@@ -129,11 +141,6 @@ body{
 	height: 42px;
 	margin-left: 165px;
 }
-#pic1{
-	height:152px;
-	width:420px; 
-	padding-left: 50px;
-}
 .numsexDiv{
 	width: 1120px;
 	float: left;
@@ -159,11 +166,6 @@ body{
 	height: 42px;
 	margin-left: 445px;
 }
-#pic2{
-	height: 275px;
-	width: 1000px;
-	padding-left: 40px;
-}
 .areaDiv{
 	width: 520px;
 	height: 538px;
@@ -178,22 +180,17 @@ body{
 	height: 42px;
 	margin-left: 150px;
 }
-#pic3{
-	width: 520px;
-	height: 300px;
-	padding-top: 80px;
-}
-#pic4{
+.pic1{
 	height:152px;
-	width:420px; 
+	width:420px;
 	padding-left: 50px;
 }
-#pic5{
+.pic2{
 	height: 275px;
 	width: 1000px;
 	padding-left: 40px;
 }
-#pic6{
+.pic3{
 	width: 520px;
 	height: 300px;
 	padding-top: 80px;
