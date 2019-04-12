@@ -6,8 +6,15 @@ body{
 	background: linear-gradient(#001741,#010E1F);
 }
 .top{
+	width: 1662px;
+	height: 837px;
 	padding-top: 20px;
 	padding-left: 60px;
+}
+.tab-menu{
+	width: 655px;
+	height: 87px;
+	padding-bottom: 20px;
 }
 .tab-menu ul{
     padding: 0;
@@ -56,12 +63,12 @@ body{
 	float: left;
 	line-height: 46px;
 	font-size: 25px;
-	padding: 0px 120px 0px 170px;
+	padding: 0px 120px 0px 200px;
 }
 .imgbt{
 	float: left;
 	height: 46px;
-	padding-left: 50px;
+	padding-left: 80px;
 }
 .numDiv{
 	width: 520px;
@@ -223,6 +230,22 @@ body{
 .timeDate ul li.tab3{
     background:url(../img/fkbt.png);
 }
+.timeDate ul li.tab2:hover {
+	transform-origin: center center;
+	transform: scale(1.1, 1.1);
+	/*-webkit-transform-origin: center center;
+	-webkit-transform: scale(1.1, 1.1);
+	-moz-transform-origin: center center;
+	-moz-transform: scale(1.1, 1.1);
+	-o-transform-origin: center center;
+	-o-transform: scale(1.1, 1.1);
+	-ms-transform-origin: center center;
+	-ms-transform: scale(1.1, 1.1);*/
+}
+.timeDate ul li.tab3:hover {
+	transform-origin: center center;
+	transform: scale(1.1, 1.1);
+}
 .layui-input {
     text-align: center;
 	width: 255px;
@@ -240,5 +263,7 @@ body{
 	width: 255px;
     height: 44px;         
 	float: right;
-	padding: 45px 75px 0px 0px;
+	position:absolute;
+	top:65px;
+	left: 1565px;
 }

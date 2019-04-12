@@ -1,8 +1,10 @@
 layui.use('laydate', function(){
   var laydate = layui.laydate;
   
-  var newDay ;
-  var newMonth ;
+  var newDay = "";
+  var newMonth  = "";
+  var days = "";
+  var months = "";
   
   $(function(){
 		var date = new Date();
@@ -17,12 +19,12 @@ layui.use('laydate', function(){
 	        strDate = "0" + strDate;
 	    }
 	    newDay = preDate.getFullYear() + seperator1 + month + seperator1 + strDate;
-	    //var monthdate = "2019-02"//preDate.getFullYear() + seperator1 + month;
 	    $("#newDate").val(newDay);
 	    newMonth = preDate.getFullYear() + seperator1 + month;
 	    getday(newDay);
+	  	getmonth(newMonth);
 	    
-	})
+  })
   
   laydate.render({
     elem: '#newDate',
@@ -30,22 +32,26 @@ layui.use('laydate', function(){
 	btns: ['now'],
     done: function(value){
 	    getday(value);
+	    days = value;
 	}
   });
-  
+
 	var url = "http://192.168.1.168:6406/service/visitor/";
+
+	$('.timeDate li').click(function () {
+		var index = $(this).index();
+		$(".tab .top").eq(index).show().siblings().hide();
+	});
 
 	$('.tab-menu li').click(function () {
 	    $(this).removeClass('tab1').addClass('tab0').siblings().removeClass('tab0').addClass('tab1');
-	    
-		//$('.tab-top li').eq($(this).index()).addClass('active').siblings().removeClass('active');  tab按钮第二种写法
 	    var index=$(this).index();
 	    $(".tab-con .day").eq(index).show().siblings().hide();
 	    if(index==0){
-	    	getday(newDay);
+	    	getday(days);
 	    	$("#newDate").remove();
 	    	$(".form").html('<input type="text" class="layui-input" id="newDate" autocomplete="off" readonly unselectable="on">');
-	    	$("#newDate").val(newDay);
+			$("#newDate").val(days);
 	    	//常规用法
 			laydate.render({
 			    elem: '#newDate',
@@ -53,10 +59,10 @@ layui.use('laydate', function(){
 			    btns: ['now'],
 			    done: function(value){
 				    getday(value);
+					$("#newDate").val(value);
 			    }
 			});
 	    }else{
-	    	getmonth(newMonth);
 	    	$("#newDate").remove();
 	    	$(".form").html('<input type="text" class="layui-input" id="newDate" autocomplete="off" readonly unselectable="on">');
 	    	laydate.render({
@@ -67,13 +73,20 @@ layui.use('laydate', function(){
 			    btns: ['confirm'],
 			    done: function(value){
 				    getmonth(value);
-				  }
-			  });
+					months = value;
+			    }
+	    	});
+	    	getmonth(months);
 	    }
 	})
 	
+	$(".timeDate li").click(function () {
+		var index=$(this).index();
+		console.log(index);
+		/*$(".tab-con .day").eq(index).show().siblings().hide();*/
+	})
+	
 	function getday(value){
-		console.log(value)
 		var data = {day : value};
 		getallpersonnum(data,url+"day/num");
 		getsexnum(data,url+"day/gendernum");
@@ -82,7 +95,6 @@ layui.use('laydate', function(){
 	}
 	
 	function getmonth(value){
-		console.log(value)
 		var data = {month : value};
 		getallpersonnum(data,url+"month/num");
 		getmonthsexnum(data,url+"month/gendernum");
@@ -97,7 +109,6 @@ layui.use('laydate', function(){
 			url: url,
 			data:data,
 			success:function(res){
-				console.log(res.num);
 				$(".spanday").text(res.num);
 			},
 			error:function(){
@@ -149,25 +160,25 @@ layui.use('laydate', function(){
 		        }
 		    ]
 		};
-    $.ajax({
-		type:"get",
-		url: url,
-		data:data,
-		success:function(res){
-			var jsonres = JSON.stringify(res);// 转成JSON格式
-			var result = $.parseJSON(jsonres);// 转成JSON对象
-			var sexAndnum = [{value:result.男, name:'男'},{value:result.女, name:'女'}];
-            myCharts1.setOption({
-                 series:[{ 
-                     data:sexAndnum
-                 }]
-            });
-		},
-		error:function(){
-			
-		}
+		$.ajax({
+			type:"get",
+			url: url,
+			data:data,
+			success:function(res){
+				var jsonres = JSON.stringify(res);// 转成JSON格式
+				var result = $.parseJSON(jsonres);// 转成JSON对象
+				var sexAndnum = [{value:result.男, name:'男'},{value:result.女, name:'女'}];
+				myCharts1.setOption({
+					 series:[{
+						 data:sexAndnum
+					 }]
+				});
+			},
+			error:function(){
+
+			}
 		});
-	  myCharts1.setOption(option);
+	  	myCharts1.setOption(option);
 	}
 	
 	//年龄		日
@@ -250,7 +261,7 @@ layui.use('laydate', function(){
 				
 			}
 		});
-	  myCharts2.setOption(option);
+	  	myCharts2.setOption(option);
 	}
 	
 	//分布		日
@@ -309,7 +320,7 @@ layui.use('laydate', function(){
 				
 			}
 		});
-	  myCharts3.setOption(option);
+	  	myCharts3.setOption(option);
 	}
 	
 	//男女		月
@@ -355,25 +366,25 @@ layui.use('laydate', function(){
 		        }
 		    ]
 		};
-    $.ajax({
-		type:"get",
-		url: url,
-		data:data,
-		success:function(res){
-			var jsonres = JSON.stringify(res);// 转成JSON格式
-			var result = $.parseJSON(jsonres);// 转成JSON对象
-			var sexAndnum = [{value:result.男, name:'男'},{value:result.女, name:'女'}];
-            myCharts4.setOption({
-                 series:[{ 
-                     data:sexAndnum
-                 }]
-            });
-		},
-		error:function(){
-			
-		}
+		$.ajax({
+			type:"get",
+			url: url,
+			data:data,
+			success:function(res){
+				var jsonres = JSON.stringify(res);// 转成JSON格式
+				var result = $.parseJSON(jsonres);// 转成JSON对象
+				var sexAndnum = [{value:result.男, name:'男'},{value:result.女, name:'女'}];
+				myCharts4.setOption({
+					 series:[{
+						 data:sexAndnum
+					 }]
+				});
+			},
+			error:function(){
+
+			}
 		});
-	  myCharts4.setOption(option);
+	  	myCharts4.setOption(option);
 	}
 	
 	function getmonthagenum(data,url){
@@ -455,7 +466,7 @@ layui.use('laydate', function(){
 				
 			}
 		});
-	  myCharts5.setOption(option);
+	  	myCharts5.setOption(option);
 	}
 	
 	function getmonthareanum(data,url){
@@ -513,7 +524,7 @@ layui.use('laydate', function(){
 				
 			}
 		});
-	  myCharts6.setOption(option);
+	  	myCharts6.setOption(option);
 	}
 	
 });
