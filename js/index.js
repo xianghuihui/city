@@ -5,6 +5,7 @@ layui.use('laydate', function(){
   var newMonth  = "";
   var days = "";
   var months = "";
+  var interval ;
   
   $(function(){
 		var date = new Date();
@@ -18,7 +19,7 @@ layui.use('laydate', function(){
 	    if (strDate >= 0 && strDate <= 9) {
 	        strDate = "0" + strDate;
 	    }
-	    newDay = preDate.getFullYear() + seperator1 + month + seperator1 + strDate;
+	  	newDay = preDate.getFullYear() + seperator1 + month + seperator1 + strDate;
 	    $("#newDate").val(newDay);
 	    newMonth = preDate.getFullYear() + seperator1 + month;
 	    getday(newDay);
@@ -37,10 +38,23 @@ layui.use('laydate', function(){
 
 	var url = "http://192.168.1.168:6406/service/visitor/";
 
+	function func(){
+		console.log(getNewDate(new Date()));
+		getallpersonnum(getNewDate(new Date()),url+"day/num");
+		getnewsexnum(getNewDate(new Date()),url+"day/gendernum");
+		getnewagenum(getNewDate(new Date()),url+"day/agepartition");
+		getnewareanum(getNewDate(new Date()),url+"day/areanum");
+	} //定时任务
+
 	$(".tab .top").eq(0).hide();
 	$('.timeDate li').click(function () {
 		var index = $(this).index();
 		$(".tab .top").eq(index).show().siblings().hide();
+		if(index==0){
+			interval = setInterval(func, 2000);
+		}else{
+			clearInterval(interval);
+		}
 	});
 
 	$('.tab-menu li').click(function () {
@@ -79,19 +93,12 @@ layui.use('laydate', function(){
 	    }
 	})
 	
-	$(".timeDate li").click(function () {
-		var index=$(this).index();
-		console.log(index);
-		/*$(".tab-con .day").eq(index).show().siblings().hide();*/
-	})
-	
 	function getday(value){
 		days = value;
-		var data = {day : value};
-		getallpersonnum(data,url+"day/num");
-		getsexnum(data,url+"day/gendernum");
-		getagenum(data,url+"day/agepartition");
-		getareanum(data,url+"day/areanum");
+		getallpersonnum(value,url+"day/num");
+		getsexnum(value,url+"day/gendernum");
+		getagenum(value,url+"day/agepartition");
+		getareanum(value,url+"day/areanum");
 	}
 	
 	function getmonth(value){
@@ -103,12 +110,12 @@ layui.use('laydate', function(){
 		getmonthareanum(data,url+"month/areanum");
 	}
 
-	function getallpersonnum(data,url){
+	function getallpersonnum(day,url){
 		//$(".spanday").text('');
 		$.ajax({
 			type:"get",
 			url: url,
-			data:data,
+			data:{day:day},
 			success:function(res){
 				$(".spanday").text(res.num);
 			},
@@ -527,5 +534,225 @@ layui.use('laydate', function(){
 		});
 	  	myCharts6.setOption(option);
 	}
-	
+
+	//男女		日
+	function getnewsexnum(day,url){
+		myCharts1 = echarts.init(document.getElementById("pic7"));
+		var option = {
+			tooltip : {
+				trigger: 'item',
+				formatter: "{b} : {c}人({d}%)"
+			},
+			color:['#7584CB','#64CBCC'],
+			legend: {
+				orient: 'vertical',
+				x: 'left',
+				y:'center',
+				data:['男','女'],
+				textStyle: {
+					color:"white"
+				}
+			},
+			series: [
+				{
+					name:'',
+					type:'pie',
+					radius: ['55%', '70%'],
+					hoverAnimation:false,	//鼠标悬停
+					itemStyle : {
+						normal : {
+							label : {
+								show : true,
+								formatter: "{c}({d}%)",//显示标签
+							},
+							labelLine : {
+								show : true,//显示标签线
+							},
+						},
+
+					},
+					data:[
+						{value:14, name:'男'},
+						{value:11, name:'女'}
+					]
+				}
+			]
+		};
+		$.ajax({
+			type:"get",
+			url: url,
+			data:{day:day},
+			success:function(res){
+				var jsonres = JSON.stringify(res);// 转成JSON格式
+				var result = $.parseJSON(jsonres);// 转成JSON对象
+				var sexAndnum = [{value:result.男, name:'男'},{value:result.女, name:'女'}];
+				myCharts1.setOption({
+					series:[{
+						data:sexAndnum
+					}]
+				});
+			},
+			error:function(){
+
+			}
+		});
+		myCharts1.setOption(option);
+	}
+
+	//年龄		日
+	function getnewagenum(day,url){
+		var myCharts2 = echarts.init(document.getElementById("pic8"));
+		var option={
+			tooltip: {
+				trigger: 'axis',
+			},
+			legend:{
+				icon : 'roundRect',
+			},
+			calculable: true,
+			xAxis: [{
+				axisLine: {
+					lineStyle: {
+						color: '#9FA9CD'
+					}
+				},
+				type: 'category',
+				//boundaryGap: false,	//顶边
+				data: ["18岁以下","19-30岁","31-40岁","41-50岁","50岁以上"]
+			}],
+			yAxis: [{
+				type: 'value',
+				splitLine:{
+					lineStyle:{
+						color: ['#1C2D53'],
+					}
+				},
+				axisLine: {
+					lineStyle: {
+						color: '#9FA9CD'
+					}
+				}
+			}],
+			series: [{
+				name: '',
+				type: 'line',
+				itemStyle:{
+					normal: {
+						label: {
+							show: true
+						}
+					}
+				},
+				//symbol: 'none',	//小圆点
+				smooth: 0.5,	//弧度 0-1
+				color: ['#66AEDE'],
+				data: [9,8,3,3,1],
+				areaStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ //折线图颜色渐变
+							offset: 0,
+							color: 'rgba(62,139,222,0.6)'
+						}, {
+							offset: 1,
+							color: 'rgba(62,139,222,0.01)'
+						}])
+					}
+				},
+			}]
+		};
+		$.ajax({
+			type:"get",
+			url: url,
+			data:{day:day},
+			success:function(res){
+				var jsonres = JSON.stringify(res);	//转为JSON格式
+				var result = $.parseJSON(jsonres);	//转为JSON对象
+				//console.log(result);
+				var num = [result.less18,result["19to30"],result["31to40"],result["41to50"],result.greater50];
+				myCharts2.setOption({
+					series:[{
+						data:num
+					}]
+				});
+			},
+			error:function(){
+
+			}
+		});
+		myCharts2.setOption(option);
+	}
+
+	//分布		日
+	function getnewareanum(day,url){
+		var myCharts3 = echarts.init(document.getElementById("pic9"));
+		var option = {
+			tooltip : {
+				trigger: 'item',
+				formatter: "{b}: {c}人"
+			},
+			calculable : false,
+			color:['#0064AD','#1CB7DB'],
+			series : [
+				{
+					name:'',
+					type:'treemap',
+					roam:false,		//鼠标滚动放大缩小
+					clickable:false,
+					breadcrumb:{
+						show: false
+					},
+					itemStyle: {
+						normal: {
+							label: {
+								show: true,
+								formatter: "{b}({c}人次)",
+							},
+						},
+						emphasis: {
+							label: {
+								show: true
+							}
+						}
+					},
+					data:[
+						{name:'影视部',value:650},{name:'大厅',value:84}
+					]
+				}
+			]
+		};
+		$.ajax({
+			type:"get",
+			url: url,
+			data:{day:day},
+			success:function(res){
+				var jsonres = JSON.stringify(res);	// 转成JSON格式
+				var result = $.parseJSON(jsonres);	// 转成JSON对象
+				var num = [{name:'影视部',value:result.影视部},{name:'大厅',value:result.大厅}];
+				myCharts3.setOption({
+					series : {
+						data:num,
+					}
+				});
+			},
+			error:function(){
+
+			}
+		});
+		myCharts3.setOption(option);
+	}
+
+	function getNewDate(date){
+		var seperator1 = "-";
+		var month = date.getMonth() + 1;
+		var strDate = date.getDate();
+		if (month >= 1 && month <= 9) {
+			month = "0" + month;
+		}
+		if (strDate >= 0 && strDate <= 9) {
+			strDate = "0" + strDate;
+		}
+		var d = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+		return d;
+	}
+
 });
