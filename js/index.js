@@ -40,7 +40,7 @@ layui.use('laydate', function(){
 
 	function func(){
 		console.log(getNewDate(new Date()));
-		getallpersonnum(getNewDate(new Date()),url+"day/num");
+		getnewallpersonnum(getNewDate(new Date()),url+"day/num");
 		getnewsexnum(getNewDate(new Date()),url+"day/gendernum");
 		getnewagenum(getNewDate(new Date()),url+"day/agepartition");
 		getnewareanum(getNewDate(new Date()),url+"day/areanum");
@@ -95,27 +95,27 @@ layui.use('laydate', function(){
 	
 	function getday(value){
 		days = value;
-		getallpersonnum(value,url+"day/num");
-		getsexnum(value,url+"day/gendernum");
-		getagenum(value,url+"day/agepartition");
-		getareanum(value,url+"day/areanum");
+		var data = {day : value};
+		getallpersonnum(data,url+"day/num");
+		getsexnum(data,url+"day/gendernum");
+		getagenum(data,url+"day/agepartition");
+		getareanum(data,url+"day/areanum");
 	}
 	
 	function getmonth(value){
 		months = value;
 		var data = {month : value};
-		getallpersonnum(data,url+"month/num");
+		getmonthallpersonnum(data,url+"month/num");
 		getmonthsexnum(data,url+"month/gendernum");
 		getmonthagenum(data,url+"month/agepartition");
 		getmonthareanum(data,url+"month/areanum");
 	}
 
-	function getallpersonnum(day,url){
-		//$(".spanday").text('');
+	function getallpersonnum(data,url){
 		$.ajax({
 			type:"get",
 			url: url,
-			data:{day:day},
+			data:data,
 			success:function(res){
 				$(".spanday").text(res.num);
 			},
@@ -127,7 +127,7 @@ layui.use('laydate', function(){
 
 	//男女		日
 	function getsexnum(data,url){
-		myCharts1 = echarts.init(document.getElementById("pic1"));
+		myCharts1 = echarts.init(document.getElementById("pic1"),'light');
 		var option = {
 		    tooltip : {
 		        trigger: 'item',
@@ -191,7 +191,7 @@ layui.use('laydate', function(){
 	
 	//年龄		日
 	function getagenum(data,url){
-		var myCharts2 = echarts.init(document.getElementById("pic2"));
+		var myCharts2 = echarts.init(document.getElementById("pic2"),'light');
 		var option={
 	        tooltip: {
 	            trigger: 'axis',
@@ -274,7 +274,7 @@ layui.use('laydate', function(){
 	
 	//分布		日
 	function getareanum(data,url){
-		var myCharts3 = echarts.init(document.getElementById("pic3"));
+		var myCharts3 = echarts.init(document.getElementById("pic3"),'light');
 		var option = {
 		    tooltip : {
 		        trigger: 'item',
@@ -330,10 +330,24 @@ layui.use('laydate', function(){
 		});
 	  	myCharts3.setOption(option);
 	}
+
+	function getmonthallpersonnum(data,url){
+		$.ajax({
+			type:"get",
+			url: url,
+			data:data,
+			success:function(res){
+				$(".spanday2").text(res.num);
+			},
+			error:function(){
+
+			}
+		});
+	}
 	
 	//男女		月
 	function getmonthsexnum(data,url){
-		myCharts4 = echarts.init(document.getElementById("pic4"));
+		myCharts4 = echarts.init(document.getElementById("pic4"),'light');
 		var option = {
 		    tooltip : {
 		        trigger: 'item',
@@ -396,7 +410,7 @@ layui.use('laydate', function(){
 	}
 	
 	function getmonthagenum(data,url){
-		var myCharts5 = echarts.init(document.getElementById("pic5"));
+		var myCharts5 = echarts.init(document.getElementById("pic5"),'light');
 		var option={
 	        tooltip: {
 	            trigger: 'axis',
@@ -478,7 +492,7 @@ layui.use('laydate', function(){
 	}
 	
 	function getmonthareanum(data,url){
-		var myCharts6 = echarts.init(document.getElementById("pic6"));
+		var myCharts6 = echarts.init(document.getElementById("pic6"),'light');
 		var option = {
 		    tooltip : {
 		        trigger: 'item',
@@ -535,9 +549,23 @@ layui.use('laydate', function(){
 	  	myCharts6.setOption(option);
 	}
 
+	function getnewallpersonnum(day,url){
+		$.ajax({
+			type:"get",
+			url: url,
+			data:{day:day},
+			success:function(res){
+				$(".spanday1").text(res.num);
+			},
+			error:function(){
+
+			}
+		});
+	}
+
 	//男女		日
 	function getnewsexnum(day,url){
-		myCharts1 = echarts.init(document.getElementById("pic7"));
+		myCharts1 = echarts.init(document.getElementById("pic7"),'light');
 		var option = {
 			tooltip : {
 				trigger: 'item',
@@ -601,7 +629,7 @@ layui.use('laydate', function(){
 
 	//年龄		日
 	function getnewagenum(day,url){
-		var myCharts2 = echarts.init(document.getElementById("pic8"));
+		var myCharts2 = echarts.init(document.getElementById("pic8"),'light');
 		var option={
 			tooltip: {
 				trigger: 'axis',
@@ -684,7 +712,7 @@ layui.use('laydate', function(){
 
 	//分布		日
 	function getnewareanum(day,url){
-		var myCharts3 = echarts.init(document.getElementById("pic9"));
+		var myCharts3 = echarts.init(document.getElementById("pic9"),'light');
 		var option = {
 			tooltip : {
 				trigger: 'item',

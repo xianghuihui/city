@@ -121,7 +121,7 @@ body{
   url('../util/UnidreamLED/UnidreamLED.woff') format('woff'), 
   local('UnidreamLED'), url("../util/UnidreamLED/UnidreamLED.woff");/***默认使用本地的***/
 }
-.spanday{
+.spanday, .spanday1, .spanday2{
 	font-size: 35px;
     font-family: 'UnidreamLED';
     letter-spacing: 8px;
